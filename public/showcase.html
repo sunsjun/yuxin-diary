@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语心日记 - TRAE AI 创造力大赛初赛作品</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #f5f7fa;
+            color: #2d3436;
+            line-height: 1.8;
+        }
+        .hero {
+            background: linear-gradient(135deg, #7EC8A0 0%, #5AAF82 100%);
+            color: #fff;
+            padding: 80px 20px 60px;
+            text-align: center;
+        }
+        .hero h1 { font-size: 36px; margin-bottom: 12px; font-weight: 700; }
+        .hero .slogan { font-size: 18px; opacity: 0.95; margin-bottom: 24px; }
+        .hero .track {
+            display: inline-block;
+            padding: 6px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        .section {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px;
+            margin: -40px 0 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            position: relative;
+            z-index: 1;
+        }
+        .section h2 {
+            font-size: 22px;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            padding-left: 14px;
+            border-left: 4px solid #7EC8A0;
+        }
+        .section h3 {
+            font-size: 17px;
+            color: #4a90d9;
+            margin: 24px 0 12px;
+        }
+        .section p { margin-bottom: 12px; color: #444; font-size: 15px; }
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .highlight-card {
+            background: #f0f7ff;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #d0e3f7;
+        }
+        .highlight-card .num {
+            font-size: 28px;
+            font-weight: 700;
+            color: #7EC8A0;
+            margin-bottom: 4px;
+        }
+        .highlight-card .desc { font-size: 14px; color: #555; }
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li {
+            padding: 10px 0 10px 28px;
+            position: relative;
+            font-size: 15px;
+            color: #444;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .feature-list li:last-child { border-bottom: none; }
+        .feature-list li::before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #7EC8A0;
+            font-weight: bold;
+        }
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+        .tech-table th {
+            background: #f5f7fa;
+            padding: 12px 16px;
+            text-align: left;
+            color: #666;
+            font-weight: 600;
+            border-bottom: 2px solid #e8ecf1;
+        }
+        .tech-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #444;
+        }
+        .tech-table td:first-child { font-weight: 600; color: #2d3436; }
+        .code-block {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            border-radius: 12px;
+            padding: 20px 24px;
+            font-family: "JetBrains Mono", "Fira Code", monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        .emotion-demo {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+        .emotion-pill {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .emotion-positive { background: #e0f5e9; color: #2d7a4e; }
+        .emotion-negative { background: #fde0e0; color: #c0392b; }
+        .emotion-neutral { background: #fef5e0; color: #b8860b; }
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .flow-step {
+            background: #7EC8A0;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .flow-arrow { color: #7EC8A0; font-size: 20px; font-weight: bold; }
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+            margin: 20px 0;
+        }
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e0e0e0;
+        }
+        .timeline-item {
+            position: relative;
+            padding: 0 0 20px 0;
+        }
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -22px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #7EC8A0;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #7EC8A0;
+        }
+        .timeline-item .time { font-size: 13px; color: #888; }
+        .timeline-item .title { font-size: 15px; font-weight: 600; color: #2d3436; margin: 2px 0; }
+        .timeline-item .desc { font-size: 14px; color: #666; }
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+            font-size: 13px;
+        }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 28px; }
+            .section { padding: 28px 20px; }
+            .highlight-grid { grid-template-columns: 1fr; }
+            .flow-diagram { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <div class="hero">
+        <h1>语心日记</h1>
+        <div class="slogan">对它说话，它替你读懂自己</div>
+        <div class="track">TRAE AI 创造力大赛 · 生活娱乐赛道 · 初赛作品</div>
+    </div>
+
+    <div class="container">
+        <!-- 作品简介 -->
+        <div class="section">
+            <h2>作品简介</h2>
+            <p>语心日记是一款 AI 语音心情记录器。用户按住按钮说话，AI 自动将语音转为文字，并识别其中的情绪倾向，生成情绪日历和趋势分析。全程 30 秒完成，无需打字，无需点选表情。</p>
+            <p>它不设社区、不设关注、不设动态，只做你一个人的情绪树洞。让你敢于记录最真实的情绪——包括愤怒、焦虑、脆弱，而不用担心人设。</p>
+
+            <div class="highlight-grid">
+                <div class="highlight-card">
+                    <div class="num">30秒</div>
+                    <div class="desc">从打开到完成记录的全流程时间</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="num">100+</div>
+                    <div class="desc">内置中文情绪关键词覆盖量</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="num">8</div>
+                    <div class="desc">细分情绪标签（开心/焦虑/愤怒等）</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="num">0</div>
+                    <div class="desc">社交功能数量，纯粹私密空间</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 核心亮点 -->
+        <div class="section">
+            <h2>核心亮点</h2>
+
+            <h3>30秒极速语音记录</h3>
+            <p>市场上绝大多数情绪 App 要求"选表情 + 输入文字 + 选标签"，记录一次需要 2-3 分钟。语心日记将全流程压缩到 30 秒：打开 → 按住说话 → 松开自动分析。</p>
+
+            <h3>中文情绪深度理解</h3>
+            <p>AI 情绪识别引擎针对中文互联网语境优化，能理解以下表达：</p>
+            <div class="emotion-demo">
+                <span class="emotion-pill emotion-negative">被老板PUA了</span>
+                <span class="emotion-pill emotion-negative">卷不动了</span>
+                <span class="emotion-pill emotion-negative">emo了</span>
+                <span class="emotion-pill emotion-negative">破防了</span>
+                <span class="emotion-pill emotion-positive">上岸了</span>
+                <span class="emotion-pill emotion-positive">太棒了</span>
+                <span class="emotion-pill emotion-neutral">还行吧</span>
+            </div>
+
+            <h3>AI 情绪闭环</h3>
+            <p>打造从语音输入到情绪洞察的完整链路：</p>
+            <div class="flow-diagram">
+                <div class="flow-step">说</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">识</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">记</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">析</div>
+            </div>
+            <p style="text-align: center; font-size: 14px; color: #666;">语音输入 → AI识别情绪 → 自动转文字存储 → 日历可视化展示</p>
+
+            <h3>零社交压力的私密空间</h3>
+            <p>砍掉一切社交功能，不设社区、不设关注、不设动态。所有数据存储在本地，不上传任何服务器，用户拥有完全的数据控制权。</p>
+        </div>
+
+        <!-- 功能展示 -->
+        <div class="section">
+            <h2>功能展示</h2>
+
+            <h3>首页 - 录音入口</h3>
+            <ul class="feature-list">
+                <li>大圆形录音按钮，按住录音，松开停止</li>
+                <li>录音中显示脉冲动画和实时转写文字</li>
+                <li>支持手动文字输入（浏览器不支持语音时的 fallback）</li>
+                <li>底部显示今日情绪概览和最近3条记录</li>
+            </ul>
+
+            <h3>日历页 - 情绪日历</h3>
+            <ul class="feature-list">
+                <li>月度日历视图，每天显示情绪色彩圆点</li>
+                <li>绿色=积极，红色=消极，黄色=平静，灰色=无记录</li>
+                <li>支持月份切换，点击日期查看当天记录</li>
+            </ul>
+
+            <h3>历史页 - 记录管理</h3>
+            <ul class="feature-list">
+                <li>按日期分组倒序显示所有记录</li>
+                <li>每条显示时间、情绪标签、文字摘要</li>
+                <li>支持长按/右键删除记录</li>
+            </ul>
+
+            <h3>设置页 - 数据管理</h3>
+            <ul class="feature-list">
+                <li>统计信息：总记录数、本周记录数</li>
+                <li>清除全部数据（二次确认）</li>
+                <li>导出数据为 JSON 格式</li>
+            </ul>
+        </div>
+
+        <!-- 技术架构 -->
+        <div class="section">
+            <h2>技术架构</h2>
+
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th>方案</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>前端框架</td><td>React 18 + TypeScript</td></tr>
+                    <tr><td>构建工具</td><td>Vite 5</td></tr>
+                    <tr><td>路由</td><td>React Router v6</td></tr>
+                    <tr><td>语音转文字</td><td>Web Speech API (SpeechRecognition)</td></tr>
+                    <tr><td>情绪识别</td><td>自研关键词库 + 规则引擎（100+ 关键词）</td></tr>
+                    <tr><td>数据存储</td><td>localStorage（本地优先，零后端）</td></tr>
+                    <tr><td>UI 设计</td><td>手写 CSS，温暖治愈系风格</td></tr>
+                </tbody>
+            </table>
+
+            <h3>项目结构</h3>
+            <div class="code-block">yuxin-diary/
+├── src/
+│   ├── engine/emotionEngine.ts    # 情绪识别引擎
+│   ├── hooks/useVoiceRecord.ts     # 语音录制 Hook
+│   ├── store/MoodContext.tsx       # 全局状态管理
+│   ├── utils/storage.ts            # 本地存储封装
+│   ├── utils/date.ts               # 日期工具
+│   ├── components/Layout/          # 底部导航布局
+│   ├── pages/HomePage/             # 首页（录音+识别）
+│   ├── pages/CalendarPage/         # 情绪日历
+│   ├── pages/HistoryPage/          # 历史记录
+│   ├── pages/RecordDetailPage/     # 记录详情
+│   ├── pages/SettingsPage/         # 设置
+│   └── styles/                     # 全局样式+设计变量
+├── docs/technical-design.md        # 技术设计文档
+└── package.json</div>
+
+            <h3>情绪识别引擎</h3>
+            <ul class="feature-list">
+                <li>三大情绪类型：积极 / 消极 / 中性</li>
+                <li>细分标签：开心、满足、感动、焦虑、低落、愤怒、疲惫、平静</li>
+                <li>支持否定词处理（"不开心" → 消极）</li>
+                <li>支持程度词加权（"非常开心" → 积极权重翻倍）</li>
+                <li>覆盖中文互联网情绪表达：PUA、emo、破防、卷不动等</li>
+            </ul>
+        </div>
+
+        <!-- 开发过程 -->
+        <div class="section">
+            <h2>开发过程</h2>
+            <p>本项目全程借助 TRAE 完成开发：</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="time">阶段一</div>
+                    <div class="title">TRAE Work 创意梳理</div>
+                    <div class="desc">通过对话梳理创意方向、竞品分析、差异化定位，生成报名帖内容</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">阶段二</div>
+                    <div class="title">TRAE IDE 技术设计</div>
+                    <div class="desc">AI 辅助编写完整的技术架构设计文档，确定技术选型和开发计划</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">阶段三</div>
+                    <div class="title">TRAE IDE 项目开发</div>
+                    <div class="desc">AI 辅助生成项目脚手架、核心引擎（情绪识别）、全部页面组件</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="time">阶段四</div>
+                    <div class="title">调试与验证</div>
+                    <div class="desc">TypeScript 编译零错误，开发服务器运行正常，5个页面全部渲染成功</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 后续规划 -->
+        <div class="section">
+            <h2>后续规划</h2>
+            <p>初赛 Demo 已实现核心闭环，复赛阶段计划完善：</p>
+            <ul class="feature-list">
+                <li>接入大模型 API 提升语音转文字和情绪识别准确率</li>
+                <li>增加周/月情绪趋势分析报告</li>
+                <li>增加个性化正向引导建议</li>
+                <li>适配 PWA 离线使用</li>
+                <li>探索小程序版本</li>
+            </ul>
+        </div>
+
+        <!-- 隐私说明 -->
+        <div class="section">
+            <h2>隐私说明</h2>
+            <p>语心日记的所有数据存储在用户本地（localStorage），不上传任何服务器，不设任何社交功能。用户拥有完全的数据控制权，可随时清除或导出。</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        语心日记 · TRAE AI 创造力大赛初赛作品 · 2026年7月
+    </div>
+</body>
+</html>
