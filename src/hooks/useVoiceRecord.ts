@@ -1,10 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
 
-interface SpeechRecognitionResult {
-  transcript: string;
-  isFinal: boolean;
-}
-
 interface UseVoiceRecordReturn {
   isRecording: boolean;
   isSupported: boolean;
@@ -22,6 +17,9 @@ export function useVoiceRecord(): UseVoiceRecordReturn {
   const [finalText, setFinalText] = useState('');
   const [error, setError] = useState<string | null>(null);
   const recognitionRef = useRef<any>(null);
+  // 用 ref 跟踪当前文本，解决 onend 闭包问题
+  const finalTextRef = useRef('');
+  const interimTextRef = useRef('');
 
   const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
   const isSupported = !!SpeechRecognition;
@@ -35,6 +33,8 @@ export function useVoiceRecord(): UseVoiceRecordReturn {
     setError(null);
     setInterimText('');
     setFinalText('');
+    finalTextRef.current = '';
+    interimTextRef.current = '';
 
     const recognition = new SpeechRecognition();
     recognition.lang = 'zh-CN';
@@ -46,16 +46,24 @@ export function useVoiceRecord(): UseVoiceRecordReturn {
       let interim = '';
       let final = '';
       for (let i = 0; i < event.results.length; i++) {
-        const result: SpeechRecognitionResult = event.results[i];
+        const result = event.results[i];
+        // Web Speech API 中 transcript 在 result[0].transcript
+        const transcript = result[0]?.transcript || '';
         if (result.isFinal) {
-          final += result.transcript;
+          final += transcript;
         } else {
-          interim += result.transcript;
+          interim += transcript;
         }
       }
-      setInterimText(interim);
+      if (interim) {
+        interimTextRef.current = interim;
+        setInterimText(interim);
+      }
       if (final) {
+        finalTextRef.current = final;
         setFinalText(final);
+        setInterimText('');
+        interimTextRef.current = '';
       }
     };
 
@@ -64,6 +72,8 @@ export function useVoiceRecord(): UseVoiceRecordReturn {
         setError('没有检测到语音，请再试一次');
       } else if (event.error === 'not-allowed') {
         setError('请允许麦克风权限后重试');
+      } else if (event.error === 'aborted') {
+        // 用户主动停止，不是错误，忽略
       } else {
         setError(`语音识别出错：${event.error}`);
       }
@@ -71,6 +81,13 @@ export function useVoiceRecord(): UseVoiceRecordReturn {
     };
 
     recognition.onend = () => {
+      // 如果没有 final 结果但有 interim 结果，用 interim 兜底
+      if (!finalTextRef.current && interimTextRef.current) {
+        finalTextRef.current = interimTextRef.current;
+        setFinalText(interimTextRef.current);
+        setInterimText('');
+        interimTextRef.current = '';
+      }
       setIsRecording(false);
     };
 
