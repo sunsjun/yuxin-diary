@@ -1,0 +1,188 @@
+.detailPage {
+  padding: var(--spacing-xl);
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: var(--spacing-xxxl);
+  padding: var(--spacing-sm) 0;
+  border: none;
+  background: none;
+  transition: color 0.2s ease;
+}
+
+.backBtn:hover {
+  color: var(--color-primary);
+}
+
+.backArrow {
+  font-size: 18px;
+}
+
+/* 日期时间 */
+.detailDateTime {
+  text-align: center;
+  margin-bottom: var(--spacing-xxl);
+}
+
+.detailDate {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.detailTimeText {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+/* 情绪标签 - 大号 */
+.detailEmotion {
+  text-align: center;
+  margin-bottom: var(--spacing-xxxl);
+}
+
+.detailEmotionTag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+}
+
+.detailEmotionTag.positive {
+  background: var(--color-positive);
+  box-shadow: 0 4px 15px rgba(126, 200, 160, 0.3);
+}
+
+.detailEmotionTag.negative {
+  background: var(--color-negative);
+  box-shadow: 0 4px 15px rgba(232, 139, 139, 0.3);
+}
+
+.detailEmotionTag.neutral {
+  background: var(--color-neutral);
+  color: var(--color-text-primary);
+  box-shadow: 0 4px 15px rgba(245, 197, 66, 0.3);
+}
+
+.detailEmotionIcon {
+  font-size: 24px;
+}
+
+/* 转写文字 */
+.detailTextCard {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xxxl);
+  box-shadow: var(--shadow-sm);
+}
+
+.detailTextTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.detailTextContent {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-text-primary);
+  word-break: break-all;
+}
+
+/* 关键词 */
+.detailKeywordsCard {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xxxl);
+  box-shadow: var(--shadow-sm);
+}
+
+.detailKeywordsTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.keywordList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.keywordItem {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-hover);
+  border: 1px solid var(--color-border);
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.keywordItem:hover {
+  background: rgba(126, 200, 160, 0.08);
+  border-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.emptyKeywords {
+  font-size: 14px;
+  color: var(--color-text-tertiary);
+}
+
+/* 不存在记录 */
+.notFound {
+  text-align: center;
+  padding: 60px var(--spacing-xxl);
+}
+
+.notFoundIcon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text-tertiary);
+}
+
+.notFoundText {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.notFoundBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.notFoundBtn:hover {
+  background: var(--color-primary-dark);
+}

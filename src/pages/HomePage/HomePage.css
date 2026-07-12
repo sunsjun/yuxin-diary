@@ -1,0 +1,411 @@
+.homePage {
+  padding: var(--spacing-xl);
+}
+
+/* 顶部标题区 */
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-xxxl);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.todayDate {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+/* 录音区域 */
+.recordSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--spacing-xxxl);
+}
+
+.recordBtn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: white;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  box-shadow: 0 4px 15px rgba(126, 200, 160, 0.4);
+}
+
+.recordBtn:hover {
+  transform: scale(1.05);
+}
+
+.recordBtn:active {
+  transform: scale(0.95);
+}
+
+.recordBtn.recording {
+  background: linear-gradient(135deg, var(--color-negative), #D47070);
+  box-shadow: 0 4px 15px rgba(232, 139, 139, 0.4);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(232, 139, 139, 0.4);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 20px rgba(232, 139, 139, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(232, 139, 139, 0);
+  }
+}
+
+.recordBtn.recording::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid rgba(232, 139, 139, 0.3);
+  animation: ripple 1.5s infinite;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.recordBtn.recording::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid rgba(232, 139, 139, 0.2);
+  animation: ripple 1.5s 0.5s infinite;
+}
+
+.recordHint {
+  margin-top: var(--spacing-md);
+  font-size: 13px;
+  color: var(--color-text-tertiary);
+}
+
+.recordHint.recording {
+  color: var(--color-negative);
+}
+
+/* 波形效果 */
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 30px;
+  margin-top: var(--spacing-md);
+}
+
+.waveformBar {
+  width: 3px;
+  border-radius: 2px;
+  background: var(--color-primary);
+  animation: wave 0.6s ease-in-out infinite;
+}
+
+.waveformBar:nth-child(1) { height: 10px; animation-delay: 0s; }
+.waveformBar:nth-child(2) { height: 18px; animation-delay: 0.1s; }
+.waveformBar:nth-child(3) { height: 26px; animation-delay: 0.2s; }
+.waveformBar:nth-child(4) { height: 18px; animation-delay: 0.3s; }
+.waveformBar:nth-child(5) { height: 10px; animation-delay: 0.4s; }
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.5); }
+  50% { transform: scaleY(1); }
+}
+
+/* interim 文字 */
+.interimText {
+  margin-top: var(--spacing-md);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  text-align: center;
+  min-height: 20px;
+  font-style: italic;
+}
+
+/* 错误提示 */
+.errorMessage {
+  margin-top: var(--spacing-md);
+  font-size: 13px;
+  color: var(--color-negative);
+  text-align: center;
+}
+
+/* 结果展示区 */
+.resultCard {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xxxl);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resultText {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
+  word-break: break-all;
+}
+
+.emotionTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+}
+
+.emotionTag.positive {
+  background: var(--color-positive);
+}
+
+.emotionTag.negative {
+  background: var(--color-negative);
+}
+
+.emotionTag.neutral {
+  background: var(--color-neutral);
+  color: var(--color-text-primary);
+}
+
+/* 手动输入 fallback */
+.manualInput {
+  display: flex;
+  gap: var(--spacing-sm);
+  width: 100%;
+  margin-bottom: var(--spacing-xxxl);
+}
+
+.manualInput input {
+  flex: 1;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0 var(--spacing-lg);
+  font-size: 14px;
+  color: var(--color-text-primary);
+  background: var(--color-bg-card);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.manualInput input:focus {
+  border-color: var(--color-primary);
+}
+
+.manualInput input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.sendBtn {
+  height: 44px;
+  padding: 0 var(--spacing-xl);
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+}
+
+.sendBtn:hover {
+  background: var(--color-primary-dark);
+}
+
+.sendBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 今日概览 */
+.todayOverview {
+  margin-bottom: var(--spacing-xxxl);
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.emotionSummary {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.summaryDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.summaryDot.positive { background: var(--color-positive); }
+.summaryDot.negative { background: var(--color-negative); }
+.summaryDot.neutral { background: var(--color-neutral); }
+
+.summaryCount {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.summaryLabel {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.emptyOverview {
+  text-align: center;
+  padding: var(--spacing-xxxl);
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+}
+
+/* 最近记录 */
+.recentRecords {
+  margin-bottom: var(--spacing-xxxl);
+}
+
+.recordCard {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.recordCard:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.recordEmotionDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.recordEmotionDot.positive { background: var(--color-positive); }
+.recordEmotionDot.negative { background: var(--color-negative); }
+.recordEmotionDot.neutral { background: var(--color-neutral); }
+
+.recordInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.recordTime {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
+}
+
+.recordText {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recordTagSmall {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  margin-top: 4px;
+}
+
+.recordTagSmall.positive {
+  background: rgba(126, 200, 160, 0.15);
+  color: var(--color-primary-dark);
+}
+
+.recordTagSmall.negative {
+  background: rgba(232, 139, 139, 0.15);
+  color: #C06060;
+}
+
+.recordTagSmall.neutral {
+  background: rgba(245, 197, 66, 0.15);
+  color: #C09820;
+}
+
+.emptyRecords {
+  text-align: center;
+  padding: var(--spacing-xxxl);
+  color: var(--color-text-tertiary);
+  font-size: 14px;
+}
