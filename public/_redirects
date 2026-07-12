@@ -1,2 +1,1 @@
-/* SPA fallback for Cloudflare Pages */
-/* 所有路由都指向 index.html，让 React Router 处理 */
+/*  /index.html  200
